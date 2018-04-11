@@ -8,12 +8,31 @@
 
 //! Efficient large, fixed-size big integers and hashes.
 
-#![cfg_attr(asm_available, feature(asm))]
+#![cfg_attr(not(feature="std"), no_std)]
 
 extern crate byteorder;
-extern crate rand;
-extern crate rustc_serialize;
-#[macro_use] extern crate heapsize;
+
+#[cfg(feature="std")]
+extern crate rustc_hex;
+
+#[macro_use]
+extern crate crunchy;
+
+#[cfg(feature="heapsizeof")]
+#[macro_use]
+extern crate heapsize;
+
+#[cfg(feature="std")]
+extern crate core;
+
+#[cfg(all(feature = "std", test))]
+#[macro_use]
+extern crate quickcheck;
 
 pub mod uint;
 pub use ::uint::*;
+
+mod ffi {
+    include!(concat!(env!("OUT_DIR"), "/ffi.rs"));
+}
+

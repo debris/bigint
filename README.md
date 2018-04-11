@@ -6,6 +6,15 @@
 
 Fixed-sized integers arithmetic
 
+To specify a dependency, add to `Cargo.toml`
+
+```toml
+[dependencies]
+bigint = "4"
+```
+
+Little example
+
 ```rust
 extern crate bigint;
 use bigint::U256;
@@ -18,3 +27,14 @@ fn main() {
 		"1643897619276947051879427220465009342380213662639797070513307648"
 	);
 }
+```
+
+### `no_std` crates
+
+This crate has a feature, `std`, that is enabled by default. To use this crate
+in a `no_std` context, add the following to your `Cargo.toml`:
+
+```toml
+[dependencies]
+bigint = { version = "4", default-features = false }
+```
